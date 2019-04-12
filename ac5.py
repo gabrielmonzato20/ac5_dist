@@ -27,7 +27,8 @@ def retorna_aluno_id(id):
 @app.route('/reseta',methods=['POST'])
 def reseta_alunos():
     alunos.clear()
-    return jsonify(alunos),200
+    professorres.clear()
+    return jsonify({'ok':'resetado com sucesso'}),200
 @app.route('/alunos/<int:id>',methods=['DELETE'])
 def delete_aluno(id):
     for index,aluno in enumerate(alunos):
@@ -52,11 +53,11 @@ def professor_show():
 def add_prof():
     prof=request.json
     professorres.append(prof)             
-@app.route('/professor/<int:id>')
+@app.route('/professores/<int:id>')
 def retorna_professor(id):
     for professor in professorres:
         if professor['id'] == id:
-            return jsonify(professor),200
+            return jsonify(professor)
     return jsonify({'erro':'professor nao encontrado'}),400
 if __name__ == '__main__':
     app.run(port=5002,debug=True,host='localhost')
